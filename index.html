@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Tracker de Cursos realizados</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    </head>
+    <body class="bg-light">
+    
+        <div class="container" id="app">
+            <main>
+                <div class="py-5 text-center">
+                    <img class="d-block mx-auto mb-4" src="/img/platzi-logo.png" alt="" width="72" height="57">
+                    <h2>Tracker de tus cursos realizados</h2>
+                    <p class="lead">Reto #1 del Curso Básico de Vue.js 2 en Platzi </p>
+                </div>
+
+                <div class="row g-5">
+                    <div class="col-md-5 col-lg-4 order-md-last">
+                        <h4 class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="text-primary">Tus cursos realizados</span>
+                            <span class="badge bg-primary rounded-pill" v-if="courses.length > 0">{{ courses.length }}</span>
+                        </h4>
+                        <ul class="list-group mb-3" v-if="courses.length > 0">
+                            <li v-for="(course, courseIndex) in courses" :key="courseIndex" class="list-group-item d-flex justify-content-between lh-sm">
+                                <div>
+                                    <h6 class="my-0">{{ course.title }}</h6>
+                                </div>
+                                <span class="text-muted">
+                                    {{ course.time }} 
+                                    <button type="button" class="btn btn-danger btn-sm" @click="removeCourse(courseIndex)">-</button>
+                                </span>
+                                
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span>Tiempo invertido:</span>
+                                <strong>{{ totalTime }} Horas</strong>
+                            </li>
+                        </ul>
+                        <h5 v-else>No tienes cursos registrados</h5>
+                    </div>
+                    <div class="col-md-7 col-lg-8">
+                        <h4 class="mb-3">Ingresa tus cursos realizados y el tiempo dedicado</h4>
+                        <form class="needs-validation" v-on:submit.prevent="addCourse">
+                            <div class="row g-3">
+                                <div class="col-sm-9">
+                                    <label for="course" class="form-label">Ingresa el título del curso</label>
+                                    <input type="text" class="form-control" id="course" v-model="title" placeholder="Curso Básico de Vue.js 2" required>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="time" class="form-label">Tiempo dedicado</label>
+                                    <input type="number" step="1" min="1" class="form-control" id="time" v-model="time" placeholder="5 hora" required>
+                                </div>
+                            </div>
+                            <hr class="my-4">
+                            <button class="w-100 btn btn-primary btn-lg" type="submit">Guardar</button>
+                        </form>
+                    </div>
+                </div>
+            </main>
+
+            <footer class="my-5 pt-5 text-muted text-center text-small">
+                <p class="mb-1">&copy; 2021 Gustavo Perez | Gustperx</p>
+                <ul class="list-inline">
+                    <li class="list-inline-item"><a href="https://twitter.com/gustperx" target="_blank">Twitter</a></li>
+                    <li class="list-inline-item"><a href="https://github.com/gustperx" target="_blank">Github</a></li>
+                    <li class="list-inline-item"><a href="https://twitter.com/gustperx" target="_blank">Contacto</a></li>
+                </ul>
+            </footer>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+        <script src="./js/app.js"></script>
+    </body>
+</html>
